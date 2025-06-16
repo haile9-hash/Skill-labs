@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Skill Labs - Premium online learning platform with interactive courses and expert instructors">
-    <meta name="keywords" content="online courses, e-learning, skill development, coding, design, business courses">
+    <meta name="description" content="Skill Labs - Premium online learning platform">
+    <meta name="keywords" content="online courses, e-learning, skill development">
     <title>Skill Labs - Transform Your Career Through Learning</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
@@ -12,283 +12,382 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <!-- Header with Navigation -->
-    <header class="header">
-        <nav class="navbar">
+    <div class="theme-toggle">
+        <button id="theme-toggle-btn">
+            <i class="fas fa-moon"></i>
+            <i class="fas fa-sun"></i>
+        </button>
+    </div>
+
+    <header class="header" id="main-header">
+        <nav class="navbar" id="main-nav">
             <div class="logo-container">
-                <a href="index.html" class="logo"><i class="fas fa-graduation-cap"></i> SKILL LABS</a>
-                <button class="mobile-menu-btn" aria-label="Toggle navigation">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <a href="#home-section" class="logo"><i class="fas fa-graduation-cap"></i> SKILL LABS</a>
             </div>
             
-            <ul class="nav-menu">
-                <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
-                <li class="nav-item"><a href="about.html" class="nav-link">About us</a></li>
-                <li class="nav-item dropdown">
-                    <a href="courses.html" class="nav-link">Courses <i class="fas fa-chevron-down"></i></a>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="#home-section" class="nav-link active">Home</a></li>
+                <li class="nav-item"><a href="#about-section" class="nav-link">About us</a></li>
+                <li class="nav-item dropdown" id="courses-dropdown-mobile">
+                    <a href="#courses-section" class="nav-link dropdown-toggle">Courses <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-content">
-                        <a href="courses.html#web-dev">Web Development</a>
-                        <a href="courses.html#data-science">Data Science</a>
-                        <a href="courses.html#design">Graphic Design</a>
-                        <a href="courses.html#business">Business</a>
+                        <a href="#web-dev">Web Development</a>
+                        <a href="#data-science">Data Science</a>
+                        <a href="#design">Graphic Design</a>
+                        <a href="#business-course">Business</a>
+                        <a href="#marketing-course">Digital Marketing</a>
+                        <a href="#writing-course">Content Writing</a>
                     </div>
                 </li>
-                <li class="nav-item"><a href="instructors.html" class="nav-link">Instructors</a></li>
-                <li class="nav-item"><a href="contact.html" class="nav-link">Contact us</a></li>
+                <li class="nav-item"><a href="#instructors-section" class="nav-link">Instructors</a></li>
+                <li class="nav-item"><a href="#contact-section" class="nav-link">Contact us</a></li>
+                <div class="auth-buttons mobile-auth">
+                    <a href="#" class="btn btn-outline" id="mobile-signin-btn">Sign in</a>
+                    <a href="#" class="btn btn-primary" id="mobile-signup-btn">Sign up</a>
+                </div>
             </ul>
             
-            <div class="auth-buttons">
-                <a href="signin.html" class="btn btn-outline">Sign in</a>
-                <a href="signup.html" class="btn btn-primary">Sign up</a>
+            <div class="header-right">
+                <div class="auth-buttons desktop-auth">
+                    <a href="#" class="btn btn-outline" id="desktop-signin-btn">Sign in</a>
+                    <a href="#" class="btn btn-primary" id="desktop-signup-btn">Sign up</a>
+                </div>
+                <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Toggle navigation">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
             </div>
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Transform Your Career <span>Through Learning</span></h1>
-            <p class="hero-text">
-                Explore interactive courses, engage with expert instructors, and embark 
-                on a journey of learning and discovery. Start your educational adventure 
-                today and unlock a world of knowledge at your fingertips.
-            </p>
-            <div class="hero-cta">
-                <a href="courses.html" class="btn btn-primary btn-large">Browse Courses</a>
-                <a href="#how-it-works" class="btn btn-outline btn-large">How It Works</a>
+    <main>
+        <section class="hero" id="home-section">
+            <div class="hero-content">
+                <h1>Transform Your Career <span>Through Learning</span></h1>
+                <p class="hero-text">
+                    Explore interactive courses, engage with expert instructors, and embark 
+                    on a journey of learning and discovery.
+                </p>
+                <div class="hero-cta">
+                    <a href="#courses-section" class="btn btn-primary btn-large">Browse Courses</a>
+                    <a href="#how-it-works" class="btn btn-outline btn-large">How It Works</a>
+                </div>
             </div>
-        </div>
-        <div class="hero-image">
-            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Students learning online" loading="lazy">
-        </div>
-    </section>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Students learning online" loading="lazy">
+            </div>
+        </section>
 
-    <!-- Features Section -->
-    <section class="features">
-        <div class="section-container">
-            <div class="section-header">
-                <h2>Why Choose Skill Labs?</h2>
-                <p>Our platform offers the best learning experience with proven results</p>
-            </div>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <i class="fas fa-laptop-code feature-icon"></i>
-                    <h3>Interactive Learning</h3>
-                    <p>Engage with hands-on projects and real-world scenarios that prepare you for actual job requirements.</p>
+        <section class="features" id="about-section">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2>Why Choose Skill Labs?</h2>
+                    <p>Our platform offers the best learning experience with proven results</p>
                 </div>
                 
-                <div class="feature-card">
-                    <i class="fas fa-chalkboard-teacher feature-icon"></i>
-                    <h3>Expert Instructors</h3>
-                    <p>Learn from industry professionals with years of practical experience in their fields.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <i class="fas fa-certificate feature-icon"></i>
-                    <h3>Certification</h3>
-                    <p>Earn recognized certificates upon course completion to boost your career prospects.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <i class="fas fa-clock feature-icon"></i>
-                    <h3>Flexible Schedule</h3>
-                    <p>Learn at your own pace with 24/7 access to materials and lifetime course access.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Popular Courses Section -->
-    <section class="popular-courses">
-        <div class="section-container">
-            <div class="section-header">
-                <h2>Popular Courses</h2>
-                <a href="courses.html" class="view-all">View All Courses <i class="fas fa-arrow-right"></i></a>
-            </div>
-            
-            <div class="courses-grid">
-                <div class="course-card">
-                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" alt="Web Development Course" loading="lazy">
-                    <div class="course-info">
-                        <span class="course-category">Development</span>
-                        <h3>Complete Web Development Bootcamp</h3>
-                        <div class="course-meta">
-                            <span><i class="fas fa-star"></i> 4.9 (1.2k)</span>
-                            <span><i class="fas fa-user-graduate"></i> 5.6k students</span>
-                        </div>
-                        <div class="course-footer">
-                            <span class="price">$89.99</span>
-                            <a href="#" class="btn btn-small">Enroll Now</a>
-                        </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-laptop-code feature-icon"></i>
+                        <h3>Interactive Learning</h3>
+                        <p>Engage with hands-on projects and real-world scenarios.</p>
                     </div>
-                </div>
-                
-                <div class="course-card">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Data Science Course" loading="lazy">
-                    <div class="course-info">
-                        <span class="course-category">Data Science</span>
-                        <h3>Data Science & Machine Learning</h3>
-                        <div class="course-meta">
-                            <span><i class="fas fa-star"></i> 4.8 (890)</span>
-                            <span><i class="fas fa-user-graduate"></i> 3.4k students</span>
-                        </div>
-                        <div class="course-footer">
-                            <span class="price">$99.99</span>
-                            <a href="#" class="btn btn-small">Enroll Now</a>
-                        </div>
+                    
+                    <div class="feature-card">
+                        <i class="fas fa-chalkboard-teacher feature-icon"></i>
+                        <h3>Expert Instructors</h3>
+                        <p>Learn from industry professionals with years of experience.</p>
                     </div>
-                </div>
-                
-                <div class="course-card">
-                    <img src="https://images.unsplash.com/photo-1541462608143-67571c6738dd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="UI/UX Design Course" loading="lazy">
-                    <div class="course-info">
-                        <span class="course-category">Design</span>
-                        <h3>UI/UX Design Masterclass</h3>
-                        <div class="course-meta">
-                            <span><i class="fas fa-star"></i> 4.7 (1.1k)</span>
-                            <span><i class="fas fa-user-graduate"></i> 4.2k students</span>
-                        </div>
-                        <div class="course-footer">
-                            <span class="price">$79.99</span>
-                            <a href="#" class="btn btn-small">Enroll Now</a>
-                        </div>
+                    
+                    <div class="feature-card">
+                        <i class="fas fa-certificate feature-icon"></i>
+                        <h3>Certification</h3>
+                        <p>Earn recognized certificates to boost your career.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <i class="fas fa-clock feature-icon"></i>
+                        <h3>Flexible Schedule</h3>
+                        <p>Learn at your own pace with 24/7 access to materials.</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials">
-        <div class="section-container">
-            <div class="section-header">
-                <h2>What Our Students Say</h2>
-                <p>Hear from our successful students around the world</p>
-            </div>
-            
-            <div class="testimonials-slider">
-                <div class="testimonial-card active">
-                    <div class="testimonial-content">
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
+        <section class="popular-courses" id="courses-section">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2>Popular Courses</h2>
+                    <a href="#courses-section" class="view-all">View All Courses <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="courses-grid">
+                    <div class="course-card" id="web-dev">
+                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" alt="Web Development Course" loading="lazy">
+                        <div class="course-info">
+                            <span class="course-category">Development</span>
+                            <h3>Complete Web Development Bootcamp</h3>
+                            <div class="course-meta">
+                                <span><i class="fas fa-star"></i> 4.9 (1.2k)</span>
+                                <span><i class="fas fa-user-graduate"></i> 5.6k students</span>
+                            </div>
+                            <div class="course-footer">
+                                <span class="price">$89.99</span>
+                                <a href="#" class="btn btn-small enroll-btn" data-course-name="Complete Web Development Bootcamp" data-course-price="89.99">Enroll Now</a>
+                            </div>
                         </div>
-                        <p>"Skill Labs completely transformed my career. The web development course gave me the skills I needed to land my dream job at Google!"</p>
-                        <div class="student-info">
-                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah Johnson">
-                            <div>
-                                <h4>Sarah Johnson</h4>
-                                <span>Web Developer at Google</span>
+                    </div>
+                    
+                    <div class="course-card" id="data-science">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Data Science Course" loading="lazy">
+                        <div class="course-info">
+                            <span class="course-category">Data Science</span>
+                            <h3>Data Science & Machine Learning</h3>
+                            <div class="course-meta">
+                                <span><i class="fas fa-star"></i> 4.8 (890)</span>
+                                <span><i class="fas fa-user-graduate"></i> 3.4k students</span>
+                            </div>
+                            <div class="course-footer">
+                                <span class="price">$99.99</span>
+                                <a href="#" class="btn btn-small enroll-btn" data-course-name="Data Science & Machine Learning" data-course-price="99.99">Enroll Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card" id="design">
+                        <img src="https://images.unsplash.com/photo-1541462608143-67571c6738dd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="UI/UX Design Course" loading="lazy">
+                        <div class="course-info">
+                            <span class="course-category">Design</span>
+                            <h3>UI/UX Design Masterclass</h3>
+                            <div class="course-meta">
+                                <span><i class="fas fa-star"></i> 4.7 (1.1k)</span>
+                                <span><i class="fas fa-user-graduate"></i> 4.2k students</span>
+                            </div>
+                            <div class="course-footer">
+                                <span class="price">$79.99</span>
+                                <a href="#" class="btn btn-small enroll-btn" data-course-name="UI/UX Design Masterclass" data-course-price="79.99">Enroll Now</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="course-card more-course" id="business-course">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Business Strategy Course" loading="lazy">
+                        <div class="course-info">
+                            <span class="course-category">Business</span>
+                            <h3>Strategic Business Management</h3>
+                            <div class="course-meta">
+                                <span><i class="fas fa-star"></i> 4.6 (750)</span>
+                                <span><i class="fas fa-user-graduate"></i> 2.8k students</span>
+                            </div>
+                            <div class="course-footer">
+                                <span class="price">$109.99</span>
+                                <a href="#" class="btn btn-small enroll-btn" data-course-name="Strategic Business Management" data-course-price="109.99">Enroll Now</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="course-card more-course" id="marketing-course">
+                        <img src="https://images.unsplash.com/photo-1557804506-669137936798?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Digital Marketing Course" loading="lazy">
+                        <div class="course-info">
+                            <span class="course-category">Marketing</span>
+                            <h3>Complete Digital Marketing</h3>
+                            <div class="course-meta">
+                                <span><i class="fas fa-star"></i> 4.9 (1.5k)</span>
+                                <span><i class="fas fa-user-graduate"></i> 6.1k students</span>
+                            </div>
+                            <div class="course-footer">
+                                <span class="price">$84.99</span>
+                                <a href="#" class="btn btn-small enroll-btn" data-course-name="Complete Digital Marketing" data-course-price="84.99">Enroll Now</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="course-card more-course" id="writing-course">
+                        <img src="https://images.unsplash.com/photo-1456324504447-ce7464ee5b4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Content Writing Course" loading="lazy">
+                        <div class="course-info">
+                            <span class="course-category">Content</span>
+                            <h3>Mastering Content Writing</h3>
+                            <div class="course-meta">
+                                <span><i class="fas fa-star"></i> 4.7 (920)</span>
+                                <span><i class="fas fa-user-graduate"></i> 3.9k students</span>
+                            </div>
+                            <div class="course-footer">
+                                <span class="price">$69.99</span>
+                                <a href="#" class="btn btn-small enroll-btn" data-course-name="Mastering Content Writing" data-course-price="69.99">Enroll Now</a>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="text-center show-more-container">
+                    <button class="btn btn-outline btn-large" id="show-more-courses">Show More Courses</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials" id="testimonials-section">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2>What Our Students Say</h2>
+                    <p>Hear from our successful students around the world</p>
+                </div>
                 
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p>"The Data Science program was incredibly comprehensive. I went from knowing nothing to building ML models in just 6 months."</p>
-                        <div class="student-info">
-                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Michael Chen">
-                            <div>
-                                <h4>Michael Chen</h4>
-                                <span>Data Scientist at Amazon</span>
+                <div class="testimonials-slider" id="testimonials-slider">
+                    <div class="testimonial-card active">
+                        <div class="testimonial-content">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p>"Skill Labs completely transformed my career. The web development course gave me the skills I needed to land my dream job at Google!"</p>
+                            <div class="student-info">
+                                <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah Johnson">
+                                <div>
+                                    <h4>Sarah Johnson</h4>
+                                    <span>Web Developer at Google</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <p>"As a designer, the UI/UX course helped me refine my skills and build a portfolio that got me multiple job offers."</p>
-                        <div class="student-info">
-                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emma Rodriguez">
-                            <div>
-                                <h4>Emma Rodriguez</h4>
-                                <span>UX Designer at Adobe</span>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p>"The Data Science program was incredibly comprehensive. I went from knowing nothing to building ML models in just 6 months."</p>
+                            <div class="student-info">
+                                <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Michael Chen">
+                                <div>
+                                    <h4>Michael Chen</h4>
+                                    <span>Data Scientist at Amazon</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="slider-controls">
-                    <button class="slider-prev"><i class="fas fa-chevron-left"></i></button>
-                    <div class="slider-dots">
-                        <span class="dot active"></span>
-                        <span class="dot"></span>
-                        <span class="dot"></span>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <p>"As a designer, the UI/UX course helped me refine my skills and build a portfolio that got me multiple job offers."</p>
+                            <div class="student-info">
+                                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emma Rodriguez">
+                                <div>
+                                    <h4>Emma Rodriguez</h4>
+                                    <span>UX Designer at Adobe</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <button class="slider-next"><i class="fas fa-chevron-right"></i></button>
+                    
+                    <div class="slider-controls">
+                        <button class="slider-prev" id="testimonial-prev"><i class="fas fa-chevron-left"></i></button>
+                        <div class="slider-dots" id="testimonial-dots">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                        <button class="slider-next" id="testimonial-next"><i class="fas fa-chevron-right"></i></button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- How It Works Section -->
-    <section class="how-it-works" id="how-it-works">
-        <div class="section-container">
-            <div class="section-header">
-                <h2>How It Works</h2>
-                <p>Start learning in just 3 simple steps</p>
+        <section class="how-it-works" id="instructors-section">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2>Meet Our Expert Instructors</h2>
+                    <p>Learn from the best in the industry</p>
+                </div>
+                <div class="steps-container">
+                    <div class="step">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Instructor 1" class="instructor-avatar">
+                        <h3>John Doe</h3>
+                        <p>Lead Web Development Instructor</p>
+                        <div class="social-links">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <img src="https://randomuser.me/api/portraits/women/76.jpg" alt="Instructor 2" class="instructor-avatar">
+                        <h3>Jane Smith</h3>
+                        <p>Senior Data Scientist</p>
+                        <div class="social-links">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Instructor 3" class="instructor-avatar">
+                        <h3>Peter Jones</h3>
+                        <p>Graphic Design Lead</p>
+                        <div class="social-links">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <div class="steps-container">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <i class="fas fa-search step-icon"></i>
-                    <h3>Find Your Course</h3>
-                    <p>Browse our extensive catalog and find the perfect course for your goals.</p>
+        </section>
+
+        <section class="how-it-works" id="how-it-works">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2>How It Works</h2>
+                    <p>Start learning in just 3 simple steps</p>
                 </div>
                 
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <i class="fas fa-user-plus step-icon"></i>
-                    <h3>Enroll & Learn</h3>
-                    <p>Enroll in the course and start learning at your own pace with expert guidance.</p>
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <i class="fas fa-certificate step-icon"></i>
-                    <h3>Get Certified</h3>
-                    <p>Complete the course, pass the assessments, and earn your certificate.</p>
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <i class="fas fa-search step-icon"></i>
+                        <h3>Find Your Course</h3>
+                        <p>Browse our extensive catalog and find the perfect course for your goals.</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <i class="fas fa-user-plus step-icon"></i>
+                        <h3>Enroll & Learn</h3>
+                        <p>Enroll in the course and start learning at your own pace with expert guidance.</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <i class="fas fa-certificate step-icon"></i>
+                        <h3>Get Certified</h3>
+                        <p>Complete the course, pass the assessments, and earn your certificate.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Newsletter Section -->
-    <section class="newsletter">
-        <div class="newsletter-content">
-            <h2>Stay Updated</h2>
-            <p>Subscribe to our newsletter for the latest courses, special offers, and learning resources</p>
-            <form class="newsletter-form">
-                <input type="email" placeholder="Enter your email" required>
-                <button type="submit" class="btn btn-primary">Subscribe</button>
-            </form>
-        </div>
-    </section>
+        <section class="newsletter" id="newsletter-section">
+            <div class="newsletter-content">
+                <h2>Stay Updated</h2>
+                <p>Subscribe to our newsletter for the latest courses, special offers, and learning resources</p>
+                <form class="newsletter-form" id="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </section>
+    </main>
 
-    <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" id="contact-section">
         <div class="footer-grid">
             <div class="footer-col">
                 <h3>Skill Labs</h3>
@@ -305,22 +404,22 @@
             <div class="footer-col">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="courses.html">Courses</a></li>
-                    <li><a href="instructors.html">Instructors</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="#home-section">Home</a></li>
+                    <li><a href="#about-section">About Us</a></li>
+                    <li><a href="#courses-section">Courses</a></li>
+                    <li><a href="#instructors-section">Instructors</a></li>
+                    <li><a href="#contact-section">Contact Us</a></li>
                 </ul>
             </div>
             
             <div class="footer-col">
                 <h3>Support</h3>
                 <ul>
-                    <li><a href="faq.html">Help Center</a></li>
-                    <li><a href="terms.html">Terms of Service</a></li>
-                    <li><a href="privacy.html">Privacy Policy</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
-                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Careers</a></li>
                 </ul>
             </div>
             
@@ -336,14 +435,105 @@
         </div>
         
         <div class="footer-bottom">
-            <p>&copy; 2025 Skill Labs. All rights reserved. | Designed with <i class="fas fa-heart"></i> for learners</p>
+            <p>&copy; 2025 Skill Labs. All rights reserved. | Designed and Developed By H/meskel Yihun</p>
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
-    <button class="back-to-top" aria-label="Back to top">
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
     </button>
+
+    <div class="modal" id="signin-modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-signin">&times;</button>
+            <div class="modal-header">
+                <h2>Sign In</h2>
+                <p>Welcome back! Please enter your details</p>
+            </div>
+            <form id="signin-form">
+                <div class="form-group">
+                    <label for="signin-email">Email</label>
+                    <input type="email" id="signin-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signin-password">Password</label>
+                    <input type="password" id="signin-password" required>
+                </div>
+                <div class="form-footer">
+                    <button type="submit" class="btn btn-primary">Sign In</button>
+                    <p>Don't have an account? <a href="#" id="switch-to-signup">Sign up</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="signup-modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-signup">&times;</button>
+            <div class="modal-header">
+                <h2>Sign Up</h2>
+                <p>Create your account to get started</p>
+            </div>
+            <form id="signup-form">
+                <div class="form-group">
+                    <label for="signup-name">Full Name</label>
+                    <input type="text" id="signup-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm">Confirm Password</label>
+                    <input type="password" id="signup-confirm" required>
+                </div>
+                <div class="form-footer">
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                    <p>Already have an account? <a href="#" id="switch-to-signin">Sign in</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="payment-modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-payment">&times;</button>
+            <div class="modal-header">
+                <h2>Enroll in <span id="course-title-payment">Course Name</span></h2>
+                <p>Total: <span id="course-price-payment">$0.00</span></p>
+                <p>Choose your payment method:</p>
+            </div>
+            <div class="payment-options">
+                <button class="payment-option-btn" data-method="telebirr">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Telebirr_logo.svg/1200px-Telebirr_logo.svg.png" alt="Telebirr Logo">
+                    <span>Telebirr</span>
+                </button>
+                <button class="payment-option-btn" data-method="paypal">
+                    <img src="https://www.paypalobjects.com/digitalassets/c/website/marketing/na/us/logos-and-badges/charge-the-world/Badge_2_決済サービス_PayPal_accept_logo_290x100.png" alt="PayPal Logo">
+                    <span>PayPal</span>
+                </button>
+                <button class="payment-option-btn" data-method="credit-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Credit_card_logo.svg/1280px-Credit_card_logo.svg.png" alt="Credit Card Icon">
+                    <span>Credit Card</span>
+                </button>
+                 <button class="payment-option-btn" data-method="google-pay">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Google_Pay_logo_%282018%29.svg/1200px-Google_Pay_logo_%282018%29.svg.png" alt="Google Pay Logo">
+                    <span>Google Pay</span>
+                </button>
+                <button class="payment-option-btn" data-method="apple-pay">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Apple_Pay_logo.svg/1200px-Apple_Pay_logo.svg.png" alt="Apple Pay Logo">
+                    <span>Apple Pay</span>
+                </button>
+            </div>
+            <p class="payment-note">
+                <small>Note: This is a demo. No actual payment will be processed.</small>
+            </p>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
