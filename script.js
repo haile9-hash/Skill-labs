@@ -1,160 +1,163 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Mobile Menu Toggle
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const navMenu = document.querySelector('.nav-menu');
-    const dropdowns = document.querySelectorAll('.dropdown');
+// script.js
 
-    mobileMenuBtn.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        mobileMenuBtn.innerHTML = navMenu.classList.contains('active') ? 
-            '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-    });
+document.addEventListener('DOMContentLoaded', () => {
+    // Smooth Scrolling for Navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const isMobileView = window.innerWidth <= 992; // Adjust breakpoint as in CSS
 
-    // Dropdown Menu Functionality for Mobile
-    dropdowns.forEach(dropdown => {
-        const link = dropdown.querySelector('.nav-link');
-        
-        link.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                dropdown.classList.toggle('active');
+            // Check if the clicked anchor is the "Courses" main link in mobile menu
+            const isMobileDropdownToggle = this.closest('.dropdown') && this.classList.contains('dropdown-toggle');
+            
+            if (isMobileDropdownToggle && isMobileView) {
+                e.preventDefault(); // Only prevent default for the "Courses" toggle in mobile view
+                // Toggle the dropdown for mobile view
+                this.closest('.nav-item.dropdown').classList.toggle('show-dropdown');
+                return; // Stop further execution for the "Courses" toggle
+            }
+
+            // For all other links (including sub-items of "Courses" and non-dropdown links)
+            e.preventDefault(); 
+
+            // Close mobile menu if open and it's a navigational link (not the dropdown toggle itself)
+            const navMenu = document.getElementById('nav-menu');
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+
+            if (navMenu.classList.contains('show') && !isMobileDropdownToggle) {
+                navMenu.classList.remove('show');
+                mobileMenuToggle.classList.remove('active'); // Revert hamburger icon
+                document.body.classList.remove('no-scroll'); // Re-enable body scroll
+                // Also close any open mobile dropdowns when the main menu closes
+                document.querySelectorAll('.nav-item.dropdown').forEach(dropdown => {
+                    dropdown.classList.remove('show-dropdown');
+                });
+            }
+
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+                // Adjust scroll position for fixed header
+                const headerOffset = document.getElementById('main-header').offsetHeight;
+                const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                // Added extra padding for better visual spacing after scroll
+                const offsetPosition = elementPosition - headerOffset - 20; 
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+
+                // Update active link in navbar (optional)
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                this.classList.add('active'); // Add active class to the clicked link
             }
         });
     });
 
-    // Close dropdowns when clicking outside on mobile
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.dropdown') && window.innerWidth <= 768) {
-            dropdowns.forEach(dropdown => {
-                dropdown.classList.remove('active');
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    mobileMenuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('show');
+        mobileMenuToggle.classList.toggle('active'); // Toggle 'active' class for hamburger animation
+        document.body.classList.toggle('no-scroll'); // Toggle body scroll
+        
+        // Close any open mobile dropdowns when the main menu is toggled
+        document.querySelectorAll('.nav-item.dropdown').forEach(dropdown => {
+            dropdown.classList.remove('show-dropdown');
+        });
+    });
+
+    // Close mobile menu when clicking outside (on the backdrop)
+    navMenu.addEventListener('click', (e) => {
+        if (e.target === navMenu && navMenu.classList.contains('show')) { // Check if click is directly on the menu (backdrop)
+            navMenu.classList.remove('show');
+            mobileMenuToggle.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+            document.querySelectorAll('.nav-item.dropdown').forEach(dropdown => {
+                dropdown.classList.remove('show-dropdown');
             });
         }
     });
 
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-                
-                // Close mobile menu if open
-                if (navMenu.classList.contains('active')) {
-                    navMenu.classList.remove('active');
-                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                }
-            }
-        });
-    });
 
-    // Form submission for newsletter
-    const newsletterForm = document.querySelector('.newsletter-form');
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const emailInput = newsletterForm.querySelector('input[type="email"]');
-            const email = emailInput.value.trim();
-            
-            if (email) {
-                // Here you would typically send the data to your server
-                console.log('Subscribed with email:', email);
-                alert('Thank you for subscribing to our newsletter!');
-                emailInput.value = '';
-            } else {
-                alert('Please enter a valid email address');
-            }
-        });
+    // Theme Toggle
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    const body = document.body;
+
+    // Check for saved theme preference
+    if (localStorage.getItem('theme') === 'dark-mode') {
+        body.classList.add('dark-mode');
     }
 
-    // Animation on scroll
-    const animateOnScroll = () => {
-        const elements = document.querySelectorAll('.feature-card, .course-card, .step');
-        
-        elements.forEach(element => {
-            const elementPosition = element.getBoundingClientRect().top;
-            const screenPosition = window.innerHeight / 1.2;
-            
-            if (elementPosition < screenPosition) {
-                element.style.opacity = '1';
-                element.style.transform = 'translateY(0)';
-            }
-        });
-    };
-
-    // Set initial state for animation
-    document.querySelectorAll('.feature-card, .course-card, .step').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    themeToggleBtn.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark-mode');
+        } else {
+            localStorage.removeItem('theme');
+        }
     });
 
     // Testimonial Slider
-    const testimonialCards = document.querySelectorAll('.testimonial-card');
-    const dots = document.querySelectorAll('.dot');
-    const prevBtn = document.querySelector('.slider-prev');
-    const nextBtn = document.querySelector('.slider-next');
+    const testimonials = document.querySelectorAll('.testimonial-card');
+    const prevBtn = document.getElementById('testimonial-prev');
+    const nextBtn = document.getElementById('testimonial-next');
+    const dotsContainer = document.getElementById('testimonial-dots');
     let currentIndex = 0;
 
     function showTestimonial(index) {
-        testimonialCards.forEach(card => card.classList.remove('active'));
-        dots.forEach(dot => dot.classList.remove('active'));
-        
-        testimonialCards[index].classList.add('active');
-        dots[index].classList.add('active');
-        currentIndex = index;
+        testimonials.forEach((card, i) => {
+            card.classList.remove('active');
+            dotsContainer.children[i].classList.remove('active');
+            if (i === index) {
+                card.classList.add('active');
+                dotsContainer.children[i].classList.add('active');
+            }
+        });
     }
 
-    function nextTestimonial() {
-        currentIndex = (currentIndex + 1) % testimonialCards.length;
+    function createDots() {
+        testimonials.forEach((_, i) => {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                currentIndex = i;
+                showTestimonial(currentIndex);
+            });
+            dotsContainer.appendChild(dot);
+        });
+    }
+
+    if (testimonials.length > 0) {
+        createDots();
         showTestimonial(currentIndex);
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex === 0) ? testimonials.length - 1 : currentIndex - 1;
+            showTestimonial(currentIndex);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex === testimonials.length - 1) ? 0 : currentIndex + 1;
+            showTestimonial(currentIndex);
+        });
     }
 
-    function prevTestimonial() {
-        currentIndex = (currentIndex - 1 + testimonialCards.length) % testimonialCards.length;
-        showTestimonial(currentIndex);
-    }
-
-    nextBtn.addEventListener('click', nextTestimonial);
-    prevBtn.addEventListener('click', prevTestimonial);
-
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => showTestimonial(index));
-    });
-
-    // Auto-rotate testimonials
-    let testimonialInterval = setInterval(nextTestimonial, 5000);
-
-    // Pause auto-rotation on hover
-    const slider = document.querySelector('.testimonials-slider');
-    slider.addEventListener('mouseenter', () => clearInterval(testimonialInterval));
-    slider.addEventListener('mouseleave', () => {
-        testimonialInterval = setInterval(nextTestimonial, 5000);
-    });
 
     // Back to Top Button
-    const backToTopBtn = document.querySelector('.back-to-top');
-    
+    const backToTopBtn = document.getElementById('back-to-top');
+
     window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 300) {
-            backToTopBtn.classList.add('visible');
+        if (window.scrollY > 300) { // Show button after scrolling down 300px
+            backToTopBtn.classList.add('show');
         } else {
-            backToTopBtn.classList.remove('visible');
-        }
-        
-        // Header scroll effect
-        const header = document.querySelector('.header');
-        if (window.pageYOffset > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+            backToTopBtn.classList.remove('show');
         }
     });
 
@@ -165,31 +168,137 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Initialize animations
-    animateOnScroll();
-    window.addEventListener('scroll', animateOnScroll);
-    window.addEventListener('load', animateOnScroll);
+    // Modals (Sign In and Sign Up)
+    const signinModal = document.getElementById('signin-modal');
+    const signupModal = document.getElementById('signup-modal');
+    const desktopSigninBtn = document.getElementById('desktop-signin-btn');
+    const mobileSigninBtn = document.getElementById('mobile-signin-btn');
+    const desktopSignupBtn = document.getElementById('desktop-signup-btn');
+    const mobileSignupBtn = document.getElementById('mobile-signup-btn');
+    const closeSigninBtn = document.getElementById('close-signin');
+    const closeSignupBtn = document.getElementById('close-signup');
+    const switchToSignupLink = document.getElementById('switch-to-signup');
+    const switchToSigninLink = document.getElementById('switch-to-signin');
 
-    // Course card hover effect
-    const courseCards = document.querySelectorAll('.course-card');
-    courseCards.forEach(card => {
-        const img = card.querySelector('img');
-        const originalSrc = img.src;
-        
-        // Preload hover image if available (you would add data-hover-src attributes to your images)
-        if (img.dataset.hoverSrc) {
-            const hoverImage = new Image();
-            hoverImage.src = img.dataset.hoverSrc;
+    function openModal(modal) {
+        modal.classList.add('show');
+        document.body.classList.add('no-scroll'); // Prevent scrolling background
+    }
+
+    function closeModal(modal) {
+        modal.classList.remove('show');
+        // Only remove no-scroll if no other modal is open
+        if (!document.querySelector('.modal.show')) {
+             document.body.classList.remove('no-scroll'); // Restore scrolling
         }
-        
-        card.addEventListener('mouseenter', () => {
-            if (img.dataset.hoverSrc) {
-                img.src = img.dataset.hoverSrc;
-            }
+    }
+
+    desktopSigninBtn.addEventListener('click', (e) => { e.preventDefault(); openModal(signinModal); });
+    mobileSigninBtn.addEventListener('click', (e) => { e.preventDefault(); 
+        // Close mobile menu if open before showing modal
+        if (navMenu.classList.contains('show')) {
+            navMenu.classList.remove('show');
+            mobileMenuToggle.classList.remove('active');
+        }
+        openModal(signinModal); 
+    });
+    desktopSignupBtn.addEventListener('click', (e) => { e.preventDefault(); openModal(signupModal); });
+    mobileSignupBtn.addEventListener('click', (e) => { e.preventDefault(); 
+        // Close mobile menu if open before showing modal
+        if (navMenu.classList.contains('show')) {
+            navMenu.classList.remove('show');
+            mobileMenuToggle.classList.remove('active');
+        }
+        openModal(signupModal); 
+    });
+
+    closeSigninBtn.addEventListener('click', () => closeModal(signinModal));
+    closeSignupBtn.addEventListener('click', () => closeModal(signupModal));
+
+    // Close modal if clicked outside content
+    window.addEventListener('click', (e) => {
+        if (e.target === signinModal) closeModal(signinModal);
+        if (e.target === signupModal) closeModal(signupModal);
+        // Also close payment modal if clicked outside
+        if (e.target === paymentModal) closeModal(paymentModal); 
+    });
+
+    // Switch between signin/signup forms
+    switchToSignupLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        closeModal(signinModal);
+        openModal(signupModal);
+    });
+
+    switchToSigninLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        closeModal(signupModal);
+        openModal(signinModal);
+    });
+
+    // Handle form submissions (for demonstration, won't actually send data)
+    document.getElementById('signin-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Sign In form submitted! (No actual data sent)');
+        closeModal(signinModal);
+        // Here you would typically send data to a server
+    });
+
+    document.getElementById('signup-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Sign Up form submitted! (No actual data sent)');
+        closeModal(signupModal);
+        // Here you would typically send data to a server
+    });
+
+    document.getElementById('newsletter-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Newsletter subscribed! (No actual data sent)');
+        e.target.reset(); // Clear the form
+    });
+
+    // Show More Courses Functionality
+    const showMoreBtn = document.getElementById('show-more-courses');
+    const moreCourses = document.querySelectorAll('.more-course');
+
+    if (showMoreBtn) {
+        showMoreBtn.addEventListener('click', () => {
+            moreCourses.forEach(course => {
+                course.style.display = 'block'; // Make hidden courses visible
+            });
+            showMoreBtn.style.display = 'none'; // Hide the "Show More" button after clicking
         });
-        
-        card.addEventListener('mouseleave', () => {
-            img.src = originalSrc;
+    }
+
+    // Payment Modal Functionality
+    const paymentModal = document.getElementById('payment-modal');
+    const closePaymentBtn = document.getElementById('close-payment');
+    const courseTitlePayment = document.getElementById('course-title-payment');
+    const coursePricePayment = document.getElementById('course-price-payment');
+    const enrollButtons = document.querySelectorAll('.enroll-btn');
+    const paymentOptionButtons = document.querySelectorAll('.payment-option-btn');
+
+    enrollButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const courseName = e.target.dataset.courseName;
+            const coursePrice = e.target.dataset.coursePrice;
+
+            courseTitlePayment.textContent = courseName;
+            coursePricePayment.textContent = `$${parseFloat(coursePrice).toFixed(2)}`;
+            
+            openModal(paymentModal);
+        });
+    });
+
+    closePaymentBtn.addEventListener('click', () => closeModal(paymentModal));
+
+    paymentOptionButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const method = e.currentTarget.dataset.method; // Use currentTarget to get the button
+            alert(`Proceeding with ${method} for enrollment. (Demo confirmation)`);
+            closeModal(paymentModal);
+            // In a real application, you'd redirect to a payment gateway or process payment here.
         });
     });
 });
